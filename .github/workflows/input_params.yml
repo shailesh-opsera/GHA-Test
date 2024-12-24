@@ -1,0 +1,30 @@
+name: Echo Input Parameters
+on:
+  push:
+    branches: [main]
+  
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Enter your name"
+        required: true
+        default: "Laila"
+      environment:
+        description: "Enter the environment (dev, prod, etc.)"
+        required: true
+        default: "dev"
+      version:
+        description: "Enter the version number"
+        required: true
+        default: "1.0.0"
+jobs:
+  echo-parameters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Echo Inputs
+        run: |
+          echo "Name: ${{ inputs.name }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Version: ${{ inputs.version }}"
